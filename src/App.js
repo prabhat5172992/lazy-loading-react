@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from "react";
+import "./App.css";
+import Loading from "./components/loading";
+import Details from "./components/details";
+const Second = lazy(() => import("./components/second"));
+
+/* React Suspense is used for cuncurrent loading of data */
+/* React lazy loading is used to load the data when it is 
+available without letting react app fall into error */
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>First Component</h1>
+      <Suspense fallback={<Loading />}>
+        <Second />
+        <div>------------------------------------------------------------</div>
+        <br />
+        <br />
+        <Details />
+      </Suspense>
     </div>
   );
 }
